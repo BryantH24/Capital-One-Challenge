@@ -7,7 +7,7 @@ from yelpapi import YelpAPI
 
 from flask_googlemaps import GoogleMaps
 
-
+import os 
 api_key = open('yelpKey.txt', 'r').read()
 #must use static folder for images
 app = Flask(__name__, static_folder=r'\templates\static')
