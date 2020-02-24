@@ -7,7 +7,7 @@
     </head>
     <body>
       <title>{% block title %}{{title}}{% endblock %}</title>
-        <div >{{googlemap("mapper", lat = {{lat}} , lng = {{longitude}} , style="height:720px;width:720px;margin:0;display:inline-block;")}}</div>
+        <div >{{googlemap("mapper", lat = latitude , lng = longitude , style="height:720px;width:720px;margin:0;display:inline-block;")}}</div>
         <div > <img src = {{image}} style = "text-align: center; width: 200px; height:200px"></div>
         <div><p>{{ipA}} </p> </div>
     </body>

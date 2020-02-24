@@ -52,7 +52,7 @@ def startPage():
 
         #return '<h1>{}</h1>'.format(str(ip))
 
-        return render_template('mapPage.html', image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress, lat = locCoor['lat'], long = locCoor['lon'])
+        return render_template('mapPage.html', image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'])
 
     return render_template('layout.html')
 
