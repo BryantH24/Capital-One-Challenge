@@ -31,8 +31,8 @@ def getIP():
 
 @app.route('/', methods = ['GET', 'POST'])
 def startPage():
-    ipAddress = "64.189.201.73"    #for testing locally
-    #ipAddress = getIP()
+    #ipAddress = "64.189.201.73"    #for testing locally
+    ipAddress = getIP()
     locCoor = getLoc(ipAddress)
     if request.method == 'POST':  #this block is only entered when the form is submitted
         resName = request.form.get('resName')
