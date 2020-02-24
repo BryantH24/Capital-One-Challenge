@@ -31,8 +31,8 @@ def getIP():
 
 @app.route('/', methods = ['GET', 'POST'])
 def startPage():
-    #ipAddress = "64.189.201.73"
-    ipAddress = getIP()
+    ipAddress = "64.189.201.73"    #for testing locally
+    #ipAddress = getIP()
     locCoor = getLoc(ipAddress)
     if request.method == 'POST':  #this block is only entered when the form is submitted
         resName = request.form.get('resName')
@@ -51,6 +51,8 @@ def startPage():
 
 
         #return '<h1>{}</h1>'.format(str(ip))
+
+        return render_template('finalPage.html',image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'] )
 
         return render_template('mapPage.html', image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'])
 

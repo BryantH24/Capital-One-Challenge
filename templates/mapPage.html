@@ -3,10 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- tab icon (favicon) -->
+        <link rel="icon" href="https://media.istockphoto.com/vectors/info-icon-stock-vector-illustration-flat-design-vector-id611313138">
         <title>Map works! </title>
     </head>
     <body>
       <title>{% block title %}{{title}}{% endblock %}</title>
+      <!-- google map part  -->
         <div >{{googlemap("mapper", lat = latitude , lng = longitude , style="height:720px;width:720px;margin:0;display:inline-block;")}}</div>
         <div > <img src = {{image}} style = "text-align: center; width: 200px; height:200px"></div>
         <div><p>{{ipA}} </p> </div>
