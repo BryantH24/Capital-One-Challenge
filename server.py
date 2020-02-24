@@ -32,6 +32,10 @@ def startPage():
         resName = request.form.get('resName')
         resLoc = request.form.get('resLoc')
         yelp_api = YelpAPI(api_key)
+        if request.headers.getlist("X-Forwarded-For"):
+           ip = request.headers.getlist("X-Forwarded-For")[0]
+        else:
+           ip = request.remote_addr
         #yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = 1)
 
         # return '''<h1>The restaurant name is: {}</h1>
@@ -42,7 +46,7 @@ def startPage():
         #           {{googlemap("please_work", lat=32.9636, lng=-96.7468, markers=[(-96.7468, 32.9636)]}}
         #           </div>
         #           <img src = {}>'''.format(resName, locCoor['lat'], locCoor['lon'], str(yelpJson), yelpJson['businesses'][0]['image_url'])
-        return '<h1>{}</h1>'.format(str(request.environ['REMOTE_ADDR']))
+        return '<h1>{}</h1>'.format(str(ip))
 
         #return render_template('mapPage.html', image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress)
 
