@@ -50,7 +50,7 @@ def startPage():
         #           <img src = {}>'''.format(resName, locCoor['lat'], locCoor['lon'], str(yelpJson), yelpJson['businesses'][0]['image_url'])
 
 
-        return '<h1>{}</h1>'.format(str(ip))
+        #return '<h1>{}</h1>'.format(str(ip))
 
         return render_template('mapPage.html', image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress)
 
