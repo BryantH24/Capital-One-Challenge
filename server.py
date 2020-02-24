@@ -8,6 +8,18 @@ from yelpapi import YelpAPI
 from flask_googlemaps import GoogleMaps
 
 import os
+
+#the number of restuarants displayed
+NUM_REST = 1
+
+class restaurant():
+    def init(self, restNum, yelpJson):
+        self.name = yelpJson['businesses'][restNum]['name']
+        self.url = yelpJson['businesses'][restNum]['url']
+        self.imgUrl = yelpJson['businesses'][restNum]['image_url']
+        self.phoneNum = yelpJson['businesses'][restNum]['phone']
+        self.lat = yelpJson['businesses'][restNum]['coordinates']['latitude']
+        self.long = yelpJson['businesses'][restNum]['coordinates']['longitude']
 api_key = open('yelpKey.txt', 'r').read()
 #must use static folder for images
 app = Flask(__name__, static_folder=r'\templates\static')
@@ -38,7 +50,9 @@ def startPage():
         resName = request.form.get('resName')
         resLoc = request.form.get('resLoc')
         yelp_api = YelpAPI(api_key)
-        yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = 1)
+        yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST)
+        r1 = restaurant()
+        r1.init(0, yelpJson)
 
         # return '''<h1>The restaurant name is: {}</h1>
         #           <h1>Your Latitiude is: {}</h1>
@@ -52,9 +66,9 @@ def startPage():
 
         #return '<h1>{}</h1>'.format(str(ip))
 
-        return render_template('finalPage.html',image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'] )
+        return render_template('finalPage.html',image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'], r1=r1 )
 
-        return render_template('mapPage.html', image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'])
+        #return render_template('mapPage.html', image = r1.imgUrl, ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'])  #original template, do not use
 
     return render_template('layout.html')
 
