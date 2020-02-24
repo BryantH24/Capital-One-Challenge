@@ -7,7 +7,7 @@ from yelpapi import YelpAPI
 
 from flask_googlemaps import GoogleMaps
 
-import os 
+import os
 api_key = open('yelpKey.txt', 'r').read()
 #must use static folder for images
 app = Flask(__name__, static_folder=r'\templates\static')
@@ -25,8 +25,9 @@ def getLoc(ipAddress):
 
 @app.route('/', methods = ['GET', 'POST'])
 def startPage():
-    ipAddress = "64.189.201.73"
-    locCoor = getLoc(ipAddress)
+    #ipAddress = "64.189.201.73"
+    locCoor = getLoc(request.remote_addr)
+
     if request.method == 'POST':  #this block is only entered when the form is submitted
         resName = request.form.get('resName')
         resLoc = request.form.get('resLoc')
@@ -41,7 +42,7 @@ def startPage():
         #           {{googlemap("please_work", lat=32.9636, lng=-96.7468, markers=[(-96.7468, 32.9636)]}}
         #           </div>
         #           <img src = {}>'''.format(resName, locCoor['lat'], locCoor['lon'], str(yelpJson), yelpJson['businesses'][0]['image_url'])
-        return render_template('mapPage.html', title= locCoor['lat'])
+        return render_template('mapPage.html', image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress)
 
     return render_template('layout.html')
 
