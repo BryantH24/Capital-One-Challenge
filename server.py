@@ -42,7 +42,7 @@ def startPage():
         #           {{googlemap("please_work", lat=32.9636, lng=-96.7468, markers=[(-96.7468, 32.9636)]}}
         #           </div>
         #           <img src = {}>'''.format(resName, locCoor['lat'], locCoor['lon'], str(yelpJson), yelpJson['businesses'][0]['image_url'])
-`       return '<h1>{}</h1>'.format(str(remote.request_addr))
+        return '<h1>{}</h1>'.format(str(remote.request_addr))
 
         #return render_template('mapPage.html', image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress)
 
