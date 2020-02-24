@@ -38,7 +38,7 @@ def startPage():
         resName = request.form.get('resName')
         resLoc = request.form.get('resLoc')
         yelp_api = YelpAPI(api_key)
-        #yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = 1)
+        yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = 1)
 
         # return '''<h1>The restaurant name is: {}</h1>
         #           <h1>Your Latitiude is: {}</h1>
