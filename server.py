@@ -33,6 +33,7 @@ def getLoc(ipAddress):
         return js
     except Exception as e:
         return "Unknown"
+
 def getIP():
     if request.headers.getlist("X-Forwarded-For"):
        ip = request.headers.getlist("X-Forwarded-For")[0]
@@ -43,10 +44,17 @@ def getIP():
 
 @app.route('/', methods = ['GET', 'POST'])
 def startPage():
-    #ipAddress = "64.189.201.73"    #for testing locally
-    ipAddress = getIP()
+    ipAddress = "64.189.201.73"    #for testing locally
+    #ipAddress = getIP()
     locCoor = getLoc(ipAddress)
+    resName = request.form.get('resName')
+    resLoc = request.form.get('resLoc')
+    yelp_api = YelpAPI(api_key)
+    yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST, term = '')
+    r1 = restaurant()
+    r1.init(0, yelpJson)
     if request.method == 'POST':  #this block is only entered when the form is submitted
+        locCoor = getLoc(ipAddress)
         resName = request.form.get('resName')
         resLoc = request.form.get('resLoc')
         yelp_api = YelpAPI(api_key)
@@ -70,7 +78,7 @@ def startPage():
 
         #return render_template('mapPage.html', image = r1.imgUrl, ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'])  #original template, do not use
 
-    return render_template('layout.html')
+    return render_template('firstPage.html',image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'], r1=r1 )
 
 
 # run the app.
