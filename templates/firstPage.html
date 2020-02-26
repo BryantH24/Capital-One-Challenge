@@ -19,9 +19,9 @@ h1, h2, h3, h4, h5, h6 {
     <a href="#home" class="w3-bar-item w3-button">The Restaurant Repo</a>
     <!-- Right-sided navbar links. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
-      <a href="#about" class="w3-bar-item w3-button">Modify Search</a>
-      <a href="#menu" class="w3-bar-item w3-button">Details</a>
-      <a href="#contact" class="w3-bar-item w3-button">About</a>
+      <a href="#detailed" class="w3-bar-item w3-button">Detailed View</a>
+      <a href="#modification" class="w3-bar-item w3-button">Modify Search</a>
+      <a href="#about" class="w3-bar-item w3-button">About</a>
     </div>
   </div>
 </div>
@@ -74,9 +74,8 @@ h1, h2, h3, h4, h5, h6 {
 <div class="w3-content" style="max-width:1100px">
 
   <!-- About Section -->
-  <div class="w3-row w3-padding-20" id="about">
+  <div class="w3-row w3-padding-20" id="detailed">
 
-    <div class="w3-col m6 w3-padding-none">
       <h1 class="w3-center">About Catering</h1><br>
       <h5 class="w3-center">Tradition since 1889</h5>
     <table class="w3-table w3-bordered">
@@ -101,33 +100,45 @@ h1, h2, h3, h4, h5, h6 {
         <td>67</td>
       </tr>
     </table>
-  </div>
 
   <hr>
 
-  <!-- Menu Section -->
-  <div class="w3-row w3-padding-64" id="menu">
-    <div class="w3-col l6 w3-padding-large">
-      <h1 class="w3-center">Our Menu</h1><br>
-      <h4>Bread Basket</h4>
-      <p class="w3-text-grey">Assortment of fresh baked fruit breads and muffins 5.50</p><br>
+  <!-- Modification Section -->
 
-      <h4>Honey Almond Granola with Fruits</h4>
-      <p class="w3-text-grey">Natural cereal of honey toasted oats, raisins, almonds and dates 7.00</p><br>
+  <div class="w3-row w3-padding-64" id="modification">
 
-      <h4>Belgian Waffle</h4>
-      <p class="w3-text-grey">Vanilla flavored batter with malted flour 7.50</p><br>
+      <h1 class="w3-center">Focused Search</h1><br>
 
-      <h4>Scrambled eggs</h4>
-      <p class="w3-text-grey">Scrambled eggs, roasted red pepper and garlic, with green onions 7.50</p><br>
+      <form action="/", method = "post">
+        <div class="w3-third l5 w3-padding-large">
+          Location: <input id = "location" placeholder = "Dallas, Texas" class="w3-input w3-animate-input" type="text" style="width:50%">
+        </div>
+        <div class="w3-third l5 w3-padding-large">
+          Category: <input id = "category" placeholder = "Chinese" class="w3-input w3-animate-input" type="text" style="width:50%">
+        </div>
+        <div class="w3-third l5 w3-padding-large">
+          Max Distance (miles): <input id = "distance" placeholder = "10" class="w3-input w3-animate-input" type="text" style="width:50%">
+        </div>
+        <div class="w3-third l5 w3-padding-large">
+          Price (1-5): <input id = "price" placeholder = "3" class="w3-input w3-animate-input" type="text" style="width:50%">
+        </div>
+        <!-- Drop down menu (not working) -->
+        <!-- <div class="w3-third l5 w3-padding-large">
+          Sort By:
+          <button class="w3-button w3-grey w3-dropdown-click">Select</button>
+          <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border">
+            <a href="#" class="w3-bar-item w3-button">Distance (default)</a>
+            <a href="#" class="w3-bar-item w3-button">Rating</a>
+            <a href="#" class="w3-bar-item w3-button">Price (Low to High)</a>
+            <a href="#" class="w3-bar-item w3-button">Price (High to Low)</a>
+          </div>
+        </div> -->
+      <input class="w3-button w3-grey w3-block" type="submit" value="Submit">
+      </form>
 
-      <h4>Blueberry Pancakes</h4>
-      <p class="w3-text-grey">With syrup, butter and lots of berries 8.50</p>
-    </div>
 
-    <div class="w3-col l6 w3-padding-large">
-      <img src="/w3images/tablesetting.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:100%">
-    </div>
+
+
   </div>
 
   <hr>
