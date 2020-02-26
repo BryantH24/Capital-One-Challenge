@@ -36,7 +36,7 @@ class restaurant():
         self.rate = yelpJson['businesses'][restNum]['rating']
         self.revNum = yelpJson['businesses'][restNum]['review_count']
         self.distance = format(yelpJson['businesses'][restNum]['distance'] / 1609, '7.2f')
-        self.price = yelpJson['businesses'][restNum]['price']
+        #self.price = yelpJson['businesses'][restNum]['price']
 
 resObjs = ["r0", "r1", "r2", "r3", "r4"]
 for res in range(0,NUM_REST):
@@ -63,8 +63,8 @@ def initObjs(yelpJson):
 
 @app.route('/', methods = ['GET', 'POST'])
 def startPage():
-    #ipAddress = "64.189.201.73"    #for testing locally
-    ipAddress = getIP()
+    ipAddress = "64.189.201.73"    #for testing locally
+    #ipAddress = getIP()
     locCoor = getLoc(ipAddress)
     yelp_api = YelpAPI(api_key)
     yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST, term = '')
