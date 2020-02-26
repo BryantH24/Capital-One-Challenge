@@ -67,21 +67,25 @@ def startPage():
     ipAddress = getIP()
     locCoor = getLoc(ipAddress)
     yelp_api = YelpAPI(api_key)
-    yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST, term = '')
+    yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST)
     initObjs(yelpJson)
     if request.method == 'POST':  #this block is only entered when the form is submitted
-        locCoor = getLoc(ipAddress)
-        resName = request.form.get('resName')
-        resLoc = request.form.get('resLoc')
+        distanceIn = 20
+        queryIn = request.form.get('query')
+        locationIn = request.form.get('location')
+        distanceIn = request.form.get('distance')
+        priceIn = request.form.get('price')
         yelp_api = YelpAPI(api_key)
-        yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST)
+        if not locationIn:
+            yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'],limit = NUM_REST, term = queryIn, distance = distanceIn, price = priceIn)
+            initObjs(yelpJson)
+        else:
+            yelpJson = yelp_api.search_query(term = queryIn, location = locationIn, distance = distanceIn, price = priceIn, limit = NUM_REST)
+            initObjs(yelpJson)
+        return render_template('finalPage.html', ipA = ipAddress, term = queryIn, latitude = yelpJson['region']['center']['latitude'], longitude = yelpJson['region']['center']['longitude'], r0=resObjs[0], r1=resObjs[1], r2=resObjs[2], r3 = resObjs[3], r4=resObjs[4])
 
 
-        return render_template('finalPage.html', ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'], r0=resObjs[0], r1=resObjs[1], r2=resObjs[2], r3 = resObjs[3], r4=resObjs[4])
-
-        #return render_template('mapPage.html', image = r1.imgUrl, ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'])  #original template, do not use
-
-    return render_template('firstPage.html',image = yelpJson['businesses'][0]['image_url'], ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'], r0=resObjs[0], r1=resObjs[1], r2=resObjs[2], r3 = resObjs[3], r4=resObjs[4])
+    return render_template('firstPage.html', ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'], r0=resObjs[0], r1=resObjs[1], r2=resObjs[2], r3 = resObjs[3], r4=resObjs[4])
 
 
 # run the app.
