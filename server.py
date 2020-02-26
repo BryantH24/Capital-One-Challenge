@@ -63,8 +63,8 @@ def initObjs(yelpJson):
 
 @app.route('/', methods = ['GET', 'POST'])
 def startPage():
-    #ipAddress = "64.189.201.73"    #for testing locally
-    ipAddress = getIP()
+    ipAddress = "64.189.201.73"    #for testing locally
+    #ipAddress = getIP()
     locCoor = getLoc(ipAddress)
     yelp_api = YelpAPI(api_key)
     yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST)
@@ -82,7 +82,7 @@ def startPage():
         else:
             yelpJson = yelp_api.search_query(term = queryIn, location = locationIn, distance = distanceIn, price = priceIn, limit = NUM_REST)
             initObjs(yelpJson)
-        return render_template('finalPage.html', ipA = ipAddress, term = queryIn, latitude = yelpJson['region']['center']['latitude'], longitude = yelpJson['region']['center']['longitude'], r0=resObjs[0], r1=resObjs[1], r2=resObjs[2], r3 = resObjs[3], r4=resObjs[4])
+        return render_template('finalPage.html', ipA = ipAddress, term = queryIn, mapR = distanceIn, latitude = yelpJson['region']['center']['latitude'], longitude = yelpJson['region']['center']['longitude'], r0=resObjs[0], r1=resObjs[1], r2=resObjs[2], r3 = resObjs[3], r4=resObjs[4])
 
 
     return render_template('firstPage.html', ipA = ipAddress, latitude = locCoor['lat'], longitude = locCoor['lon'], r0=resObjs[0], r1=resObjs[1], r2=resObjs[2], r3 = resObjs[3], r4=resObjs[4])
