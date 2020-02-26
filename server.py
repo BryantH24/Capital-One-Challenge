@@ -39,7 +39,7 @@ class restaurant():
         #self.price = yelpJson['businesses'][restNum]['price']
 
 resObjs = ["r0", "r1", "r2", "r3", "r4"]
-for res in range(0,NUM_REST):
+for res in range(0,NUM_REST-1):
     resObjs[res] = restaurant()
 
 def getLoc(ipAddress):
