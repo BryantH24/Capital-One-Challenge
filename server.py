@@ -66,9 +66,9 @@ def startPage():
     #ipAddress = "64.189.201.73"    #for testing locally
     ipAddress = getIP()
     locCoor = getLoc(ipAddress)
-    return str(locCoor)
     yelp_api = YelpAPI(api_key)
     yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST)
+    return str(yelpJson)
     initObjs(yelpJson)
     if request.method == 'POST':  #this block is only entered when the form is submitted
         distanceIn = 20
