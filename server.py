@@ -63,8 +63,8 @@ def initObjs(yelpJson):
 
 @app.route('/', methods = ['GET', 'POST'])
 def startPage():
-    ipAddress = "64.189.201.73"    #for testing locally
-    #ipAddress = getIP()
+    #ipAddress = "64.189.201.73"    #for testing locally
+    ipAddress = getIP()
     locCoor = getLoc(ipAddress)
     yelp_api = YelpAPI(api_key)
     yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST, term = '')
