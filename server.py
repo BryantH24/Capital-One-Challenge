@@ -68,7 +68,7 @@ def startPage():
     locCoor = getLoc(ipAddress)
     yelp_api = YelpAPI(api_key)
     yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST)
-    return str(yelpJson)
+    yelpJson.json()
     initObjs(yelpJson)
     if request.method == 'POST':  #this block is only entered when the form is submitted
         distanceIn = 20
