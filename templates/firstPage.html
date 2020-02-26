@@ -32,40 +32,67 @@ h1, h2, h3, h4, h5, h6 {
     {{googlemap("mapper",
       lat = latitude,
       lng = longitude,
-      markers = [{
-        'icon' : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+      markers = [
+      {'icon' : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
         'lat': latitude,
         'lng': longitude,
         'infobox' : "Current Location"
-      },{
-        'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+      },
+      {'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+        'lat': r0.lat,
+        'lng': r0.long,
+      'infobox': r0.name},
+      {'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
         'lat': r1.lat,
         'lng': r1.long,
-      'infobox': r1.name}],
+      'infobox': r1.name},
+      {'icon': 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+        'lat': r2.lat,
+        'lng': r2.long,
+      'infobox': r2.name},
+      {'icon': 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
+        'lat': r3.lat,
+        'lng': r3.long,
+      'infobox': r3.name},
+      {'icon': 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png',
+        'lat': r4.lat,
+        'lng': r4.long,
+      'infobox': r4.name},
+      ],
       style="height:430px;width:430px;margin:60px;display:inline-block;")}}
   </div>
-  <div class="w3-display-topright w3-padding-large w3-opacity" style = "width:60%">
+  <div class="w3-display-topright w3-padding-large " style = "width:60%">
     <h1 class="w3-xlarge">Best Restaurants In Your Area</h1>
-    <table class="w3-table w3-bordered">
+    <table class="w3-table w3-bordered w3-large">
     <tr>
       <th>Restaurant</th>
       <th>Category</th>
       <th>Phone Number</th>
     </tr>
     <tr>
-      <td><a href = {{r1.url}}>{{r1.name}}</a></td>
-      <td>{{r1.url}}</td>
-      <td>50</td>
+      <td><img src = "http://maps.google.com/mapfiles/ms/icons/green-dot.png"><a href = {{r0.url}}>{{r0.name}}</a></td>
+      <td>{{r0.category}}</td>
+      <td>{{r0.phoneNum}}</td>
     </tr>
     <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
+      <td><img src = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"><a href = {{r1.url}}>{{r1.name}}</a></td>
+      <td>{{r1.category}}</td>
+      <td>{{r1.phoneNum}}</td>
     </tr>
     <tr>
-      <td>Adam</td>
-      <td>Johnson</td>
-      <td>67</td>
+      <td><img src = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"><a href = {{r2.url}}>{{r2.name}}</a></td>
+      <td>{{r2.category}}</td>
+      <td>{{r2.phoneNum}}</td>
+    </tr>
+    <tr>
+      <td><img src = "http://maps.google.com/mapfiles/ms/icons/purple-dot.png"><a href = {{r3.url}}>{{r3.name}}</a></td>
+      <td>{{r3.category}}</td>
+      <td>{{r3.phoneNum}}</td>
+    </tr>
+    <tr>
+      <td><img src = "http://maps.google.com/mapfiles/ms/icons/orange-dot.png"><a href = {{r3.url}}>{{r4.name}}</a></td>
+      <td>{{r4.category}}</td>
+      <td>{{r4.phoneNum}}</td>
     </tr>
   </table>
 </header>
@@ -76,28 +103,61 @@ h1, h2, h3, h4, h5, h6 {
   <!-- About Section -->
   <div class="w3-row w3-padding-20" id="detailed">
 
-      <h1 class="w3-center">About Catering</h1><br>
-      <h5 class="w3-center">Tradition since 1889</h5>
-    <table class="w3-table w3-bordered">
+      <h2 class="w3-center">Detailed Results</h2><br>
+    <table class="w3-table w3-bordered w3-xlarge w3-centered">
       <tr>
-        <th>Restaurant</th>
-        <th>Category</th>
-        <th>Phone Number</th>
+        <td>Image</td>
+        <td>Name</a></td>
+        <td>Category</td>
+        <td>Phone Number</td>
+        <td>Rating (Out of 5)</td>
+        <td>Number of Reviews</td>
+        <td>Distance (miles)</td>
       </tr>
       <tr>
+        <td><img src = {{r0.imgUrl}} style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
+        <td><a href = {{r0.url}}>{{r0.name}}</a></td>
+        <td>{{r0.category}}</td>
+        <td>{{r0.phoneNum}}</td>
+        <td>{{r0.rate}}</td>
+        <td>{{r0.revNum}}</td>
+        <td>{{r0.distance}}</td>
+      </tr>
+      <tr>
+        <td><img src = {{r1.imgUrl}} style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
         <td><a href = {{r1.url}}>{{r1.name}}</a></td>
-        <td>{{r1.url}}</td>
-        <td>50</td>
+        <td>{{r1.category}}</td>
+        <td>{{r1.phoneNum}}</td>
+        <td>{{r1.rate}}</td>
+        <td>{{r1.revNum}}</td>
+        <td>{{r1.distance}}</td>
       </tr>
       <tr>
-        <td>Eve</td>
-        <td>Jackson</td>
-        <td>94</td>
+        <td><img src = {{r2.imgUrl}} style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
+        <td><a href = {{r2.url}}>{{r2.name}}</a></td>
+        <td>{{r2.category}}</td>
+        <td>{{r2.phoneNum}}</td>
+        <td>{{r2.rate}}</td>
+        <td>{{r2.revNum}}</td>
+        <td>{{r2.distance}}</td>
       </tr>
       <tr>
-        <td>Adam</td>
-        <td>Johnson</td>
-        <td>67</td>
+        <td><img src = {{r3.imgUrl}} style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
+        <td><a href = {{r3.url}}>{{r3.name}}</a></td>
+        <td>{{r3.category}}</td>
+        <td>{{r3.phoneNum}}</td>
+        <td>{{r3.rate}}</td>
+        <td>{{r3.revNum}}</td>
+        <td>{{r3.distance}}</td>
+      </tr>
+      <tr>
+        <td><img src = {{r4.imgUrl}} style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
+        <td><a href = {{r3.url}}>{{r4.name}}</a></td>
+        <td>{{r4.category}}</td>
+        <td>{{r4.phoneNum}}</td>
+        <td>{{r4.rate}}</td>
+        <td>{{r4.revNum}}</td>
+        <td>{{r4.distance}}</td>
       </tr>
     </table>
 
@@ -110,16 +170,16 @@ h1, h2, h3, h4, h5, h6 {
       <h1 class="w3-center">Focused Search</h1><br>
 
       <form action="/", method = "post">
-        <div class="w3-third l5 w3-padding-large">
+        <div class="w3-quarter l5 w3-padding-large w3-large">
+          Query: <input id = "query" placeholder = "Hot Pot" class="w3-input w3-animate-input" type="text" style="width:50%">
+        </div>
+        <div class="w3-quarter l5 w3-padding-large w3-large">
           Location: <input id = "location" placeholder = "Dallas, Texas" class="w3-input w3-animate-input" type="text" style="width:50%">
         </div>
-        <div class="w3-third l5 w3-padding-large">
-          Category: <input id = "category" placeholder = "Chinese" class="w3-input w3-animate-input" type="text" style="width:50%">
-        </div>
-        <div class="w3-third l5 w3-padding-large">
+        <div class="w3-quarter l5 w3-padding-large w3-large">
           Max Distance (miles): <input id = "distance" placeholder = "10" class="w3-input w3-animate-input" type="text" style="width:50%">
         </div>
-        <div class="w3-third l5 w3-padding-large">
+        <div class="w3-quarter l5 w3-padding-large w3-large">
           Price (1-5): <input id = "price" placeholder = "3" class="w3-input w3-animate-input" type="text" style="width:50%">
         </div>
         <!-- Drop down menu (not working) -->
