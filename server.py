@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, url_for
 from flask import request
 
 import requests
@@ -14,7 +14,7 @@ NUM_REST = 5
 
 #initialize app
 #must use static folder for images
-app = Flask(__name__, static_folder=r'\templates\static')
+app = Flask(__name__, static_url_path='/static')
 
 #opening (non-pushed) API key files
 api_key = open('yelpKey.txt', 'r').read()
@@ -63,8 +63,8 @@ def initObjs(yelpJson):
 
 @app.route('/', methods = ['GET', 'POST'])
 def startPage():
-    ipAddress = "64.189.201.73"    #for testing locally
-    #ipAddress = getIP()
+    #ipAddress = "64.189.201.73"    #for testing locally
+    ipAddress = getIP()
     locCoor = getLoc(ipAddress)
     yelp_api = YelpAPI(api_key)
     yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST)
