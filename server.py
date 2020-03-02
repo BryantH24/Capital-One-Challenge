@@ -73,7 +73,7 @@ def checkResults(yelpJson):
 def startPage():
     yelp_api = YelpAPI(api_key)
     #ipAddress = "64.189.201.73"    #for testing locally
-    #ipAddress = getIP()           #for deployment
+    ipAddress = getIP()           #for deployment
     locCoor = getLoc(ipAddress)
     yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST)
     initObjs(yelpJson, 5)
