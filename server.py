@@ -59,7 +59,7 @@ def getIP():
        ip = request.remote_addr
     return ip
 #initializes all objects at same time
-def initObjs(yelpJson):
+def initObjs(yelpJson, NUM_REST):
     for counter in range(0,NUM_REST):
         resObjs[counter].init(counter, yelpJson)
 #makes sure that there are 4 restaurants in yelp output
@@ -72,11 +72,11 @@ def checkResults(yelpJson):
 @app.route('/', methods = ['GET', 'POST'])
 def startPage():
     yelp_api = YelpAPI(api_key)
-    ipAddress = "64.189.201.73"    #for testing locally
+    #ipAddress = "64.189.201.73"    #for testing locally
     #ipAddress = getIP()           #for deployment
     locCoor = getLoc(ipAddress)
     yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST)
-    initObjs(yelpJson)
+    initObjs(yelpJson, 5)
     if request.method == 'POST':  #this block is only entered when the form is submitted
         #read in form values
         queryIn = request.form.get('query')
@@ -87,7 +87,7 @@ def startPage():
         yelpJson = yelp_api.search_query(term = queryIn, location = locationIn, distance = distanceIn, price = priceIn, limit = NUM_REST)
         if checkResults(yelpJson)==-1: #if the search is too specific
             return '<h1> Your search did not return enough restaurants to display, please try again</h1><a href = "/" class = "w3-xlarge w3-button ">Clear Search</a>'
-        initObjs(yelpJson)
+        initObjs(yelpJson, 5)
         #render page after search using values from form
         return render_template('finalPage.html',
                                 ipA = ipAddress,
@@ -110,7 +110,20 @@ def startPage():
                             r2=resObjs[2],
                             r3 = resObjs[3],
                             r4=resObjs[4])
-
+@app.route('/moreResults')
+def moreResults():
+    yelp_api = YelpAPI(api_key)
+    #ipAddress = "64.189.201.73"
+    ipAddress = getIP()     #for testing locally
+    locCoor = getLoc(ipAddress)
+    if len(resObjs) < 9:
+        for objectNameMaker in range(5, 10):  #should prob put into a function
+            resObjs.append('r' + str(objectNameMaker))
+            resObjs[objectNameMaker] = restaurant()
+    NUM_REST = 10
+    yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = 10)
+    initObjs(yelpJson, 10)
+    return render_template('moreResults.html', resObjs = resObjs)
 
 # run the app.
 if __name__ == "__main__":

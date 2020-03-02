@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
   </div>
 </div>
 
-<!-- Header -->
+<!-- Map -->
 <header class="w3-display-container w3-content" style="max-width:1600px;min-width:1000px" id="home">
   <div style = "width:40%">
     {{googlemap("mapper",
@@ -65,6 +65,7 @@ h1, h2, h3, h4, h5, h6 {
       ],
       style="height:430px;width:430px;margin:60px;display:inline-block;")}}
   </div>
+  <!-- Table to the right of the map  -->
   <div class="w3-display-topright w3-padding-large " style = "width:60%">
     <h1 class="w3-xlarge">Best Restaurants In Your Area</h1>
     <table class="w3-table w3-bordered w3-large">
@@ -104,7 +105,7 @@ h1, h2, h3, h4, h5, h6 {
 <!-- Page content -->
 <div class="w3-content" style="max-width:1100px">
 
-  <!-- About Section -->
+  <!-- Detailed Results  -->
   <div class="w3-row w3-padding-20" id="detailed">
 
       <h2 class="w3-center">Detailed Results</h2><br>
@@ -164,10 +165,12 @@ h1, h2, h3, h4, h5, h6 {
         <td>{{r4.distance}}</td>
       </tr>
     </table>
-
+    <form action = "/moreResults">
+      <input class="w3-button w3-grey w3-block" type="submit" value="All Search Results">
+    </form>
   <hr>
 
-  <!-- Modification Section -->
+  <!-- Search Modification -->
 
   <div class="w3-row w3-padding-64" id="modification">
 
@@ -189,14 +192,11 @@ h1, h2, h3, h4, h5, h6 {
       <input class="w3-button w3-grey w3-block" type="submit" value="Submit">
       </form>
 
-
-
-
   </div>
 
   <hr>
 
-  <!-- Contact Section -->
+  <!-- About -->
   <div class="w3-container w3-padding-32" id="about">
     <h1><img src= "/static/logo.png" style = "max-width: 80px">About</h1><br>
     <p class="w3-text-blue-grey w3-large"><b>"Let food be thy medicine and medicine be thy food." - Hippocrates</b></p>

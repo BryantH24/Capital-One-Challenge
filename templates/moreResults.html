@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<title>The Restaurant Repo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<head>
+  <link rel="icon" href="/static/logo.ico">
+  <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+</head>
+<style>
+body {background-color : #E8E8E8; font-family: "Muli", Sans-Serif;}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Muli";
+  letter-spacing: 2px;
+}
+</style>
+
+<body>
+  <!-- Top Navigation Bar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+      <a href="/" class="w3-bar-item w3-button"><img src= "/static/logo.png" style = "max-width: 30px" />The Restaurant Repo</a>
+      <!-- Right-sided navbar links. Hide them on small screens -->
+      <div class="w3-right w3-hide-small">
+        <a href="/" class="w3-bar-item w3-button">Home</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="w3-content" style="max-width:1100px">
+
+    <!-- Detailed Results  -->
+    <div class="w3-row w3-padding-20" id="detailed">
+
+        <h2 class="w3-center">Detailed Results</h2><br>
+      <table class="w3-table w3-bordered w3-xlarge w3-centered">
+        <tr>
+          <td>Image</td>
+          <td>Name</td>
+          <td>Category</td>
+          <td>Phone Number</td>
+          <td>Rating (Out of 5)</td>
+          <td>Number of Reviews</td>
+          <td>Distance (miles)</td>
+        </tr>
+        {% for obj in resObjs %}
+          <tr>
+            <td><img src = {{obj.imgUrl}} style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
+            <td><a href = {{obj.url}}>{{obj.name}}</a></td>
+            <td>{{obj.category}}</td>
+            <td>{{obj.phoneNum}}</td>
+            <td>{{obj.rate}}</td>
+            <td>{{obj.revNum}}</td>
+            <td>{{obj.distance}}</td>
+          </tr>
+        {% endfor %}
+        <h1>{{debugger}}</h1>
+      </table>
+      <form action = "#home">
+        <input class="w3-button w3-grey w3-block" type="submit" value="Back to Top">
+      </form>
+    <hr>
+
+
+
+  <footer class="w3-center w3-light-grey w3-padding-32">
+    <p><img src= "/static/logo.png" style = "max-width: 30px">Powered by w3.css, Python, Flask, and YelpAPI.</p>
+  </footer>
+
+</body>
+</html>
