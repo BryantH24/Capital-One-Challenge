@@ -14,6 +14,15 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Muli";
   letter-spacing: 2px;
 }
+.zoom {
+  padding: 50px;
+  transition: transform .2s; /* Animation */
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
 </style>
 <body>
 
@@ -120,7 +129,7 @@ h1, h2, h3, h4, h5, h6 {
         <td>Distance (miles)</td>
       </tr>
       <tr>
-        <td><img src = {{r0.imgUrl}} style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
+        <td><img src = {{r0.imgUrl}} class = "zoom" style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
         <td><a href = {{r0.url}}>{{r0.name}}</a></td>
         <td>{{r0.category}}</td>
         <td>{{r0.phoneNum}}</td>
@@ -129,7 +138,7 @@ h1, h2, h3, h4, h5, h6 {
         <td>{{r0.distance}}</td>
       </tr>
       <tr>
-        <td><img src = {{r1.imgUrl}} style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
+        <td><img src = {{r1.imgUrl}} class = "zoom" style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
         <td><a href = {{r1.url}}>{{r1.name}}</a></td>
         <td>{{r1.category}}</td>
         <td>{{r1.phoneNum}}</td>
@@ -138,7 +147,7 @@ h1, h2, h3, h4, h5, h6 {
         <td>{{r1.distance}}</td>
       </tr>
       <tr>
-        <td><img src = {{r2.imgUrl}} style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
+        <td><img src = {{r2.imgUrl}} class = "zoom" style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
         <td><a href = {{r2.url}}>{{r2.name}}</a></td>
         <td>{{r2.category}}</td>
         <td>{{r2.phoneNum}}</td>
@@ -147,7 +156,7 @@ h1, h2, h3, h4, h5, h6 {
         <td>{{r2.distance}}</td>
       </tr>
       <tr>
-        <td><img src = {{r3.imgUrl}} style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
+        <td><img src = {{r3.imgUrl}} class = "zoom" style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
         <td><a href = {{r3.url}}>{{r3.name}}</a></td>
         <td>{{r3.category}}</td>
         <td>{{r3.phoneNum}}</td>
@@ -156,7 +165,7 @@ h1, h2, h3, h4, h5, h6 {
         <td>{{r3.distance}}</td>
       </tr>
       <tr>
-        <td><img src = {{r4.imgUrl}} style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
+        <td><img src = {{r4.imgUrl}} class = "zoom" style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>
         <td><a href = {{r3.url}}>{{r4.name}}</a></td>
         <td>{{r4.category}}</td>
         <td>{{r4.phoneNum}}</td>
