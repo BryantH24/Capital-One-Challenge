@@ -9,7 +9,7 @@ from flask_googlemaps import GoogleMaps
 
 import os
 
-#the number of restuarants displayed, can be increased with edits in html
+#the number of restuarants displayed on home page, can be increased with edits in html
 NUM_REST = 5
 
 #initialize app
@@ -37,12 +37,20 @@ class restaurant():
         self.revNum = yelpJson['businesses'][restNum]['review_count']
         self.distance = format(yelpJson['businesses'][restNum]['distance'] / 1609, '7.2f')
         self.price = yelpJson['businesses'][restNum]['price']
+class formAnswers():
+    def init(self):
+        self.query = ''
+        self.location = ''
+        self.distance = ''
+        self.price = ''
 
 #on run, creates array of restaurant objects
 resObjs = ["r0", "r1", "r2", "r3", "r4"]
 for res in range(0,NUM_REST):
     resObjs[res] = restaurant()
 
+form = formAnswers()
+form.init()
 #gets location from ip using ip-api call
 def getLoc(ipAddress):
     try:
@@ -79,20 +87,20 @@ def startPage():
     initObjs(yelpJson, 5)
     if request.method == 'POST':  #this block is only entered when the form is submitted
         #read in form values
-        queryIn = request.form.get('query')
-        locationIn = request.form.get('location')
-        distanceIn = request.form.get('distance')
-        priceIn = str(int(request.form.get('price')) -1)
+        form.query = request.form.get('query')
+        form.location = request.form.get('location')
+        form.distance = request.form.get('distance')
+        form.price = str(int(request.form.get('price')) -1)
         #search with form values
-        yelpJson = yelp_api.search_query(term = queryIn, location = locationIn, distance = distanceIn, price = priceIn, limit = NUM_REST)
+        yelpJson = yelp_api.search_query(term = form.query, location = form.location, distance = form.distance, price = form.price, limit = NUM_REST)
         if checkResults(yelpJson)==-1: #if the search is too specific
             return '<h1> Your search did not return enough restaurants to display, please try again</h1><a href = "/" class = "w3-xlarge w3-button ">Clear Search</a>'
         initObjs(yelpJson, 5)
         #render page after search using values from form
         return render_template('finalPage.html',
                                 ipA = ipAddress,
-                                term = queryIn,
-                                mapR = distanceIn,
+                                term = form.query,
+                                mapR = form.distance,
                                 latitude = yelpJson['region']['center']['latitude'],
                                 longitude = yelpJson['region']['center']['longitude'],
                                 r0=resObjs[0],
@@ -122,6 +130,17 @@ def moreResults():
             resObjs[objectNameMaker] = restaurant()
     NUM_REST = 10
     yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = 10)
+    initObjs(yelpJson, 10)
+    return render_template('moreResults.html', resObjs = resObjs)
+
+@app.route('/moreSearchResults')
+def moreSearchResults():
+    if len(resObjs) < 9:
+        for objectNameMaker in range(5, 10):  #should prob put into a function
+            resObjs.append('r' + str(objectNameMaker))
+            resObjs[objectNameMaker] = restaurant()
+    yelp_api = YelpAPI(api_key)
+    yelpJson = yelp_api.search_query(term = form.query, location = form.location, distance = form.distance, price = form.price, limit = 10)
     initObjs(yelpJson, 10)
     return render_template('moreResults.html', resObjs = resObjs)
 
