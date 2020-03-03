@@ -36,7 +36,14 @@ class restaurant():
         self.rate = yelpJson['businesses'][restNum]['rating']
         self.revNum = yelpJson['businesses'][restNum]['review_count']
         self.distance = format(yelpJson['businesses'][restNum]['distance'] / 1609, '7.2f')
-        self.price = yelpJson['businesses'][restNum]['price']
+#KNOWN BUG: Yelp API may return non-restaurant results (aka Duke Gardens) which do not have a price. However, I ended up
+#not using the price value anyways, as search can filter through price. This code catches the error if I decide to expand
+#to results other than restaurants
+        # try:
+        #     self.price = yelpJson['businesses'][restNum]['price']
+        # except KeyError:
+        #     self.price = 'N/A'
+
 class formAnswers():
     def init(self):
         self.query = ''
@@ -80,7 +87,7 @@ def checkResults(yelpJson):
 @app.route('/', methods = ['GET', 'POST'])
 def startPage():
     yelp_api = YelpAPI(api_key)
-    #ipAddress = "64.189.201.73"    #for testing locally
+    #ipAddress = "152.3.43.40"    #for testing locally #using duke IP bc duke gardens bug
     ipAddress = getIP()           #for deployment
     locCoor = getLoc(ipAddress)
     yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST)
@@ -121,8 +128,8 @@ def startPage():
 @app.route('/moreResults')
 def moreResults():
     yelp_api = YelpAPI(api_key)
-    #ipAddress = "64.189.201.73"
-    ipAddress = getIP()     #for testing locally
+    #ipAddress = "152.3.43.40"    #for testing locally
+    ipAddress = getIP()
     locCoor = getLoc(ipAddress)
     if len(resObjs) < 9:
         for objectNameMaker in range(5, 10):  #should prob put into a function
