@@ -87,8 +87,8 @@ def checkResults(yelpJson):
 @app.route('/', methods = ['GET', 'POST'])
 def startPage():
     yelp_api = YelpAPI(api_key)
-    ipAddress = "23.121.182.143"    #for testing locally #using duke IP bc duke gardens bug
-    #ipAddress = getIP()           #for deployment
+    #ipAddress = "23.121.182.143"    #for testing locally #using duke IP bc duke gardens bug
+    ipAddress = getIP()           #for deployment
     locCoor = getLoc(ipAddress)
     yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST)
     initObjs(yelpJson, 5)
@@ -127,8 +127,8 @@ def startPage():
                             r4=resObjs[4])
 @app.route('/moreResults')
 def moreResults():
-    yelp_api = YelpAPI(api_key)
-    #ipAddress = "152.3.43.40"    #for testing locally
+    #yelp_api = YelpAPI(api_key)
+    ipAddress = "152.3.43.40"    #for testing locally
     ipAddress = getIP()
     locCoor = getLoc(ipAddress)
     if len(resObjs) < 9:
