@@ -127,8 +127,8 @@ def startPage():
                             r4=resObjs[4])
 @app.route('/moreResults')
 def moreResults():
-    #yelp_api = YelpAPI(api_key)
-    ipAddress = "152.3.43.40"    #for testing locally
+    yelp_api = YelpAPI(api_key)
+    #ipAddress = "152.3.43.40"    #for testing locally
     ipAddress = getIP()
     locCoor = getLoc(ipAddress)
     if len(resObjs) < 9:
