@@ -52,10 +52,11 @@ h1, h2, h3, h4, h5, h6 {
           <td>Name</td>
           <td>Category</td>
           <td>Phone Number</td>
-          <td>Rating (Out of 5)</td>
-          <td>Number of Reviews</td>
+          <td>Rating (1-5)</td>
+          <td>Reviews</td>
           <td>Distance (miles)</td>
         </tr>
+        <!-- iterating through the restaurant objects for displaying.  -->
         {% for obj in resObjs %}
           <tr>
             <td><img src = {{obj.imgUrl}} class = "zoom" style="width:100%;max-width:250px;max-height:250px;padding:20px"></td>

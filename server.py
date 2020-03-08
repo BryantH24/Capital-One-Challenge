@@ -87,8 +87,8 @@ def checkResults(yelpJson):
 @app.route('/', methods = ['GET', 'POST'])
 def startPage():
     yelp_api = YelpAPI(api_key)
-    #ipAddress = "152.3.43.40"    #for testing locally #using duke IP bc duke gardens bug
-    ipAddress = getIP()           #for deployment
+    ipAddress = "23.121.182.143"    #for testing locally #using duke IP bc duke gardens bug
+    #ipAddress = getIP()           #for deployment
     locCoor = getLoc(ipAddress)
     yelpJson = yelp_api.search_query(latitude = locCoor['lat'], longitude = locCoor['lon'], limit = NUM_REST)
     initObjs(yelpJson, 5)
@@ -97,7 +97,7 @@ def startPage():
         form.query = request.form.get('query')
         form.location = request.form.get('location')
         form.distance = request.form.get('distance')
-        form.price = str(int(request.form.get('price')) -1)
+        form.price = str(int(request.form.get('price')))
         #search with form values
         yelpJson = yelp_api.search_query(term = form.query, location = form.location, distance = form.distance, price = form.price, limit = NUM_REST)
         if checkResults(yelpJson)==-1: #if the search is too specific
