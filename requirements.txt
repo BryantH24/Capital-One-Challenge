@@ -1,4 +1,4 @@
 Flask==1.1.1
 flask-googlemaps==0.4.0
 yelpapi==2.4.0
-requests==2.11.1
+requests==2.20.0
